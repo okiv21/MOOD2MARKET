@@ -148,7 +148,7 @@ def load_sentiment():
 @st.cache_data(ttl=60)
 def get_btc_price():
     try:
-        r = requests.get("https://api.binance.com/api/v3/ticker/24hr?symbol=BTCUSDT", timeout=10)
+        r = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_24hr_change=true&include_24hr_vol=true&include_high_low=true", timeout=10)
         r.raise_for_status()
         d = r.json()
         return {
@@ -186,7 +186,7 @@ def get_hourly_prices(days=7):
     try:
         end   = int(datetime.now().timestamp() * 1000)
         start = int((datetime.now() - timedelta(days=days)).timestamp() * 1000)
-        url   = (f"https://api.binance.com/api/v3/klines?symbol=BTCUSDT"
+        url   = (f"https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days={days}&interval=daily"
                  f"&interval=1h&startTime={start}&endTime={end}&limit=500")
         r = requests.get(url, timeout=15)
         r.raise_for_status()
