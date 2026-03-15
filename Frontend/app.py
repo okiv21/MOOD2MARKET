@@ -139,22 +139,19 @@ def load_sentiment():
 def get_btc_price():
     try:
         r = requests.get(
-            "https://api.coingecko.com/api/v3/simple/price"
-            "?ids=bitcoin&vs_currencies=usd"
-            "&include_24hr_change=true"
-            "&include_24hr_vol=true"
-            "&include_high_low=true",
+            "https://api.coingecko.com/api/v3/coins/markets"
+            "?vs_currency=usd&ids=bitcoin",
             timeout=15,
             headers={"Accept": "application/json"}
         )
         r.raise_for_status()
-        d = r.json()["bitcoin"]
+        d = r.json()[0]
         return {
-            "price":      float(d["usd"]),
-            "change_24h": float(d["usd_24h_change"]),
-            "high_24h":   float(d.get("usd_24h_high", 0)),
-            "low_24h":    float(d.get("usd_24h_low", 0)),
-            "volume":     float(d.get("usd_24h_vol", 0)),
+            "price":      float(d["current_price"]),
+            "change_24h": float(d["price_change_percentage_24h"]),
+            "high_24h":   float(d["high_24h"]),
+            "low_24h":    float(d["low_24h"]),
+            "volume":     float(d["total_volume"]),
             "error":      None,
         }
     except Exception as e:
@@ -186,7 +183,7 @@ def get_hourly_prices(days=7):
     try:
         r = requests.get(
             f"https://api.coingecko.com/api/v3/coins/bitcoin/market_chart"
-            f"?vs_currency=usd&days={days}&interval=hourly",
+            f"?vs_currency=usd&days={days}",
             timeout=15,
             headers={"Accept": "application/json"}
         )
