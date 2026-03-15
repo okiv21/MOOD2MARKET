@@ -240,7 +240,7 @@ def chart_layout(title="", height=380):
 
 
 def generate_insight(chart_name, context_data):
-    GROQ_API_KEY = "YOUR-GROQ-KEY-HERE"
+    GROQ_API_KEY = st.secrets["YOUR-GROQ-KEY-HERE"]
     try:
         payload = {
             "model": "llama-3.3-70b-versatile",
