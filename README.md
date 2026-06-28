@@ -134,6 +134,25 @@ mood2market/
 
 ---
 
+## Visualizations
+
+**Daily net Reddit vs News sentiment**
+Net daily sentiment from retail (Reddit) and institutional (News/GDELT) sources tracked against BTC price movements.
+
+![Daily net Reddit vs News sentiment](images/daily_net_reddit_vs_news.png)
+
+**News sentiment distribution**
+Distribution of FinBERT positive / negative / neutral scores across collected news articles.
+
+![News sentiment distribution](images/news_distribution.png)
+
+**Reddit sentiment distribution**
+Distribution of FinBERT positive / negative / neutral scores across collected Reddit posts.
+
+![Reddit sentiment distribution](images/reddit_distribution.png)
+
+---
+
 ## Research Question
 
 > *To what extent can integrating dual sentiment signals from news media and public social media with deep learning time-series models improve the accuracy of short-term cryptocurrency price prediction compared to models using price data alone?*
